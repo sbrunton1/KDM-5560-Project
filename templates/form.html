@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <form action="/" method = "POST">
+            <p>Chat input
+                <input type = "text" name = "chat_input" />
+                <input type = "submit" value = "Submit" />
+            </p>
+        </form>
+        <ul>
+            {% for response in form_data %}
+            <li>
+                <h2 class="userIn">{{response[0]}}</h2>
+                <h2 class="botOut">{{response[1]}}</h2>
+            </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
