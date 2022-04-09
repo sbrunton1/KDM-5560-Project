@@ -6,21 +6,20 @@
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/form.css') }}">
     </head>
     <body>
-        <form action="/" method = "POST">
-            <p>Chat input
-                <input type = "text" name = "chat_input" />
-                <input type = "submit" value = "Submit" />
-            </p>
-        </form>
         <div class="chatBox">
             <ul class="chats">
-            {% for response in form_data %}
-            <li>
-                <div class="userIn talk-bubble tri-right left-top">{{response[0]}}</div>
-                <div class="botOut talk-bubble tri-right right-top">{{response[1]}}</div>
-            </li>
-            {% endfor %}
-        </ul>
+                {% for response in form_data %}
+                <li>
+                    <div class="userIn talk-bubble tri-right round left-in">{{response[0]}}</div>
+                    <div class="botOut talk-bubble tri-right round right-in">{{response[1]}}</div>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
+        <form action="/" method = "POST">
+            <p>
+                <input class="sendBox input" type="text" name = "chat_input" />
+            </p>
+        </form>
     </body>
 </html>

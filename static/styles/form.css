@@ -1,51 +1,44 @@
 /* CSS talk bubble */
 .talk-bubble {
-    margin: 40px;
-    display: inline-block;
+    margin: 20px;
+    display: inline-flex;
     position: relative;
-    width: 200px;
+    width: 100px;
     height: auto;
-    padding: 20px;
+    padding: 18px;
 }
 
-.tri-right.left-top:after{
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-    left: -20px;
-    right: auto;
-    top: 0px;
-    bottom: auto;
-    border: 22px solid;
-    border-color: #f45c5c transparent transparent transparent;
+.round{
+  border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+
 }
 
-.tri-right.right-top:after{
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-    left: auto;
-    right: -20px;
-    top: 0px;
-    bottom: auto;
-    border: 20px solid;
-    border-color: #69d4f7 transparent transparent transparent;
+.sendBox {
+    height: 30px;
+    width: 400px;
 }
 
 .userIn {
-    background-color: #f45c5c;
+    float: left;
+    background-color: #E91E63;
+    color: #fff;
+    border-bottom-left-radius: 0.125rem;
 }
 
 .botOut {
     background-color: #69d4f7;
     top: 50px;
+    float: right;
+    background-color: #ECEFF1;
+    color: #607D8B;
+    border-bottom-right-radius: 0.125rem;
 }
 
 .chatBox {
     height: 400px;
-    width: 800px;
+    width: 400px;
     overflow: scroll;
     display: flex;
     flex-direction: column-reverse;
@@ -60,4 +53,5 @@
 
 .chats {
     list-style: none;
+    margin: 40px 0px 40px -25px;
 }
