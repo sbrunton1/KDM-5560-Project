@@ -2,7 +2,8 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>ChatBot</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/form.css') }}">
     </head>
     <body>
         <form action="/" method = "POST">
@@ -11,13 +12,15 @@
                 <input type = "submit" value = "Submit" />
             </p>
         </form>
-        <ul>
+        <div class="chatBox">
+            <ul class="chats">
             {% for response in form_data %}
             <li>
-                <h2 class="userIn">{{response[0]}}</h2>
-                <h2 class="botOut">{{response[1]}}</h2>
+                <div class="userIn talk-bubble tri-right left-top">{{response[0]}}</div>
+                <div class="botOut talk-bubble tri-right right-top">{{response[1]}}</div>
             </li>
             {% endfor %}
         </ul>
+        </div>
     </body>
 </html>

@@ -25,9 +25,15 @@ def basicTraining(bot):
                   'what\'s your name?',
                   'i\'m pybot. ask me a math question, please.']
 
+    math_talk_1 = ['pythagorean theorem',
+                   'a squared plus b squared equals c squared.']
+
+    math_talk_2 = ['law of cosines',
+                   'c**2 = a**2 + b**2 - 2 * a * b * cos(gamma)']
+
     list_trainer = ListTrainer(bot)
 
-    for item in small_talk:
+    for item in (small_talk, math_talk_1, math_talk_2):
         list_trainer.train(item)
 
 
@@ -37,8 +43,6 @@ def basicTraining(bot):
 """
 
 def response(request, bot):
-    print(request)
     bot_response = bot.get_response(request)
-    print(bot_response)
 
     return bot_response

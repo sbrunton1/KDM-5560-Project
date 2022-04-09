@@ -11,8 +11,9 @@ form_data = []
 
 # create instance of chat bot, train the bot using simple training function
 my_bot = ChatBot(name='FlaskChatBot', read_only=True,
-                     logic_adapters=['chatterbot.logic.BestMatch'])
-my_bot = ChatBotUtils.basicTraining(my_bot)
+                     logic_adapters=['chatterbot.logic.MathematicalEvaluation',
+                                     'chatterbot.logic.BestMatch'])
+ChatBotUtils.basicTraining(my_bot)
 
 # Flask API routes for application, get method returns view of app frontend.
 @app.route('/', methods=['GET'])

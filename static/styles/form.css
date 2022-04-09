@@ -1,0 +1,63 @@
+/* CSS talk bubble */
+.talk-bubble {
+    margin: 40px;
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    height: auto;
+    padding: 20px;
+}
+
+.tri-right.left-top:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -20px;
+    right: auto;
+    top: 0px;
+    bottom: auto;
+    border: 22px solid;
+    border-color: #f45c5c transparent transparent transparent;
+}
+
+.tri-right.right-top:after{
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: -20px;
+    top: 0px;
+    bottom: auto;
+    border: 20px solid;
+    border-color: #69d4f7 transparent transparent transparent;
+}
+
+.userIn {
+    background-color: #f45c5c;
+}
+
+.botOut {
+    background-color: #69d4f7;
+    top: 50px;
+}
+
+.chatBox {
+    height: 400px;
+    width: 800px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column-reverse;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+ /* Hide scrollbar for Chrome, Safari and Opera */
+.chatBox::-webkit-scrollbar {
+    display: none;
+}
+
+.chats {
+    list-style: none;
+}
