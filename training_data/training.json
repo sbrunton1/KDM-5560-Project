@@ -1,0 +1,23 @@
+{"topics": [
+    {"topic": "greeting",
+     "inputs": ["Hi", "Hey", "Is anyone there?", "Hello", "Hay"],
+     "responses": ["Hello", "Hi", "Hi there"]
+    },
+    {"topic": "goodbye",
+     "inputs": ["Bye", "See you later", "Goodbye"],
+     "responses": ["See you later", "Have a nice day", "Bye! Come back again"]
+    },
+    {"topic": "thanks",
+     "inputs": ["Thanks", "Thank you", "That's helpful", "Thanks for the help"],
+     "responses": ["Happy to help!", "Any time!", "My pleasure", "You're most welcome!"]
+    },
+    {"topic": "whom",
+     "inputs": ["Who are you?", "What are you?"],
+     "responses": ["I'm a chatbot!"]
+    },
+    {"topic": "about",
+      "inputs": ["How are you?"],
+      "responses": ["I'm good!, thanks for asking!"]
+    }
+]
+}

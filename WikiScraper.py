@@ -19,6 +19,9 @@ class WikiScraper:
     Scrapes text from wiki pages to be made into corpus files.
     """
 
+    def __init__(self):
+        pass
+
     all_text = []
 
     def scrape(self):
@@ -49,3 +52,6 @@ class WikiScraper:
         for i in range(len(chunked_sentences)):
             for rel in nltk.sem.extract_rels('PERSON', 'ORGANIZATION', chunked_sentences[i], corpus='ace', pattern=IS):
                 print(self.all_text[i])
+
+    def create_topics(self):
+        print(test)

@@ -21,7 +21,6 @@
 }
 
 .userIn {
-    float: left;
     background-color: #E91E63;
     color: #fff;
     border-bottom-left-radius: 0.125rem;
@@ -30,7 +29,6 @@
 .botOut {
     background-color: #69d4f7;
     top: 50px;
-    float: right;
     background-color: #ECEFF1;
     color: #607D8B;
     border-bottom-right-radius: 0.125rem;
