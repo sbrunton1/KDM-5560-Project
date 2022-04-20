@@ -23,29 +23,39 @@ class WikiScraper:
 
     If you leave a port open run the following
     netstat -ano | findstr :9001
-    taskkill /PID <enter your Pid> /f
+    taskkill /PID  608 /f
+
+    todo
+    define function to update additonal urls
+    run entirity of functions
+    create kill connection
+    create POS to json appender
     """
+
     all_text = []
     subject_sentence = {}
     object_sentence = {}
     relation_sentence = {}
+    pos = {}
 
     def __init__(self):
         # Download the Stanford CoreNLP package with Stanza's installation command
         # This'll take several minutes, depending on the network speed
+        self.document = None
         corenlp_dir = './corenlp'
         stanza.install_corenlp(dir=corenlp_dir)
 
         # Set the CORENLP_HOME environment variable to point to the installation location
         os.environ["CORENLP_HOME"] = corenlp_dir
-        self.client = CoreNLPClient(timeout=15000, be_quiet=True, annotators=['openie'],
+        self.client = CoreNLPClient(timeout=15000, be_quiet=True,
                                     endpoint='http://localhost:9001')
         self.client.start()
         time.sleep(10)
 
-    # def scrape(self, url="https://eldenring.wiki.fextralife.com/Hand+Axe"):
-    #     self.page_scrape(url)
-    #     self.get_relationships()
+    def scrape(self, url):
+        self.page_scrape(url)
+        self.generate_training_tokens()
+        self.append_tokens()
 
     def page_scrape(self, url):
         page = requests.get(url)
@@ -85,6 +95,23 @@ class WikiScraper:
                 print(self.all_text[i])
         return self.space_swap(tokenized_sentences)  # this will need changed
 
+    # Setters
+    def generate_training_tokens(self):
+        postags = ['NNPS', 'NNP']
+        for text in self.all_text:
+            self.document = self.client.annotate(text, annotators='pos', output_format='json')
+            for sentence in self.document['sentences']:
+                for token in sentence['tokens']:
+                    if (token['pos'] in postags) or (token['index'] == 1 and 'NN' in token['pos']):
+                        self.pos.append({"topic": token['word'], "inputs": [token['word']], "responses": [text]})
+
+    def append_tokens(self):
+        with open('training_data/training.json', 'r+') as file:
+            file_data = json.load(file)
+            file_data["topics"].append(self.pos)
+            file.seek(0)
+            json.dump(file_data, file, indent=4)
+
     # Getters
     def get_toke_sent(self):
         tokenized_sentences = [nltk.sent_tokenize(sentence) for sentence in self.all_text]
@@ -96,17 +123,18 @@ class WikiScraper:
     def get_triplets(self):
         triples = []
         for text in self.all_text:
-            self.document = self.client.annotate(text, output_format='json')
+            self.document = self.client.annotate(text, annotators='openie', output_format='json')
             for sentence in self.document['sentences']:
                 for triple in sentence['openie']:
+                    print(sentence)
                     triples.append({
                         'subject': triple['subject'],
                         'relation': triple['relation'],
                         'object': triple['object']
                     })
-                    self.subject_sentence.update({triple['subject']: text})
-                    self.relation_sentence.update({triple['relation']: text})
-                    self.object_sentence.update({triple['object']: text})
+                    self.subject_sentence.append({triple['subject']: text})
+                    self.relation_sentence.append({triple['relation']: text})
+                    self.object_sentence.append({triple['object']: text})
         return triples
 
     def get_subject_sentence(self):
@@ -118,11 +146,38 @@ class WikiScraper:
     def get_object_sentence(self):
         return self.object_sentence
 
+    def get_tokenized_nouns(self):
+        return self.pos
+
+    # needs modified still
+    def get_relationships(self):
+        tokenized_sentences = [nltk.sent_tokenize(sentence) for sentence in self.all_text]
+        tokenized_word = [nltk.word_tokenize(sentence) for sentence in self.all_text]
+        tagged_sentences = [nltk.pos_tag(sentence) for sentence in tokenized_word]
+        chunked_sentences = [nltk.ne_chunk(sentence) for sentence in tagged_sentences]
+        print("token word")
+        for s in tokenized_word:
+            print(s)
+        print("token sent")
+        for s in tokenized_sentences:
+            print(s)
+        print("Tag")
+        for s in tagged_sentences:
+            print(s)
+        print("chunk")
+        for s in chunked_sentences:
+            print(s)
+        IS = re.compile(r'.*\bis\b(?!\b.+ing)')
+        for i in range(len(chunked_sentences)):
+            for rel in nltk.sem.extract_rels('PERSON', 'ORGANIZATION', chunked_sentences[i], corpus='ace', pattern=IS):
+                print(self.all_text[i])
+        return self.space_swap(tokenized_sentences)  # this will need changed
+
     # Utility methods
     def space_swap(self, lst):
         text_mod = []
         for s in lst:
-            self.text_mod.append(str(s).replace(u'\xa0', u' '))
+            text_mod.append(str(s).replace(u'\xa0', u' '))
         return text_mod
 
     def stop_client(self):
