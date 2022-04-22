@@ -1,23 +1,69 @@
-{"topics": [
-    {"topic": "greeting",
-     "inputs": ["Hi", "Hey", "Is anyone there?", "Hello", "Hay"],
-     "responses": ["Hello", "Hi", "Hi there"]
-    },
-    {"topic": "goodbye",
-     "inputs": ["Bye", "See you later", "Goodbye"],
-     "responses": ["See you later", "Have a nice day", "Bye! Come back again"]
-    },
-    {"topic": "thanks",
-     "inputs": ["Thanks", "Thank you", "That's helpful", "Thanks for the help"],
-     "responses": ["Happy to help!", "Any time!", "My pleasure", "You're most welcome!"]
-    },
-    {"topic": "whom",
-     "inputs": ["Who are you?", "What are you?"],
-     "responses": ["I'm a chatbot!"]
-    },
-    {"topic": "about",
-      "inputs": ["How are you?"],
-      "responses": ["I'm good!, thanks for asking!"]
-    }
-]
+{
+    "topics": [
+        {
+            "topic": "greeting",
+            "inputs": [
+                "Hi",
+                "Hey",
+                "Is anyone there?",
+                "Hello",
+                "Hay"
+            ],
+            "responses": [
+                "Hello",
+                "How are you?",
+                "Hey how is it going?",
+                "Welcome, glad to meet you!"
+            ]
+        },
+        {
+            "topic": "thanks",
+            "inputs": [
+                "Thanks",
+                "Thank you",
+                "That's helpful",
+                "Thanks for the help"
+            ],
+            "responses": [
+                "Happy to help!"
+            ]
+        },
+        {
+            "topic": "whom",
+            "inputs": [
+                "Who are you?",
+                "What are you?"
+            ],
+            "responses": [
+                "I'm an AI chatbot, powered by tensorflow!"
+            ]
+        },
+        {
+            "topic": "about",
+            "inputs": [
+                "How are you?"
+            ],
+            "responses": [
+                "I'm good!, thanks for asking!"
+            ]
+        },
+        {
+            "topic": "know_more",
+            "inputs": [
+                "Can you tell me more?",
+                "Anything else?",
+                "More"
+            ],
+            "responses": [
+                "I don't know what you're talking about"
+            ]
+        },
+        {
+            "topic": "unknown",
+            "inputs": [],
+            "responses": [
+                "I really don't know anything about that, perhaps you should teach me!"
+            ]
+        }
+    ]
 }

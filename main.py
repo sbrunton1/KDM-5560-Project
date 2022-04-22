@@ -1,7 +1,5 @@
-import json
+import json, logging, random, pickle
 import numpy as np
-import random
-import pickle
 from tensorflow import keras
 from sklearn.preprocessing import LabelEncoder
 from flask import Flask, render_template, request, redirect, url_for
@@ -12,6 +10,9 @@ app.config["DEBUG"] = True
 
 # Form data which will track conversation  between the user and the bot.
 form_data = []
+
+# topic tracking
+previous_topic = None
 
 with open("training_data/training.json") as file:
     training_data = json.load(file)
@@ -34,13 +35,22 @@ def home():
 # Get form data, pass through chatbot response function and append.
 @app.route('/', methods = ['POST'])
 def data():
-
+    global previous_topic
     input = request.form.get('chat_input')
 
     # Getting response confidence intervals
     result = model.predict(keras.preprocessing.sequence.pad_sequences(tokenizer.texts_to_sequences([input]),
                                                                       truncating='post', maxlen=max_len))
-    tag = lbl_encoder.inverse_transform([np.argmax(result)])
+
+    if result[0][np.argmax(result)] < 0.98:
+        tag = "unknown"
+    else:
+        tag = lbl_encoder.inverse_transform([np.argmax(result)])
+
+    if tag == "know_more" and previous_topic is not None:
+        tag = previous_topic
+
+    previous_topic = tag
 
     response = ""
 
