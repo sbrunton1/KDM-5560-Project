@@ -3,8 +3,9 @@ import numpy as np
 from tensorflow import keras
 from sklearn.preprocessing import LabelEncoder
 from flask import Flask, render_template, request, redirect, url_for, Markup
-from chatbot_trainer import ChatBot
+from chatbot_trainer import retrain_model
 from utils.trainingDataUtils import append_tokens
+from utils import WikiScraper, trainingDataUtils
 
 # Create the flask app
 app = Flask(__name__)
@@ -57,6 +58,10 @@ def send_chat():
     global previous_topic
     input = request.form.get('chat_input')
 
+    if input == "clear":
+        form_data.clear()
+        return redirect(url_for('chat_home'))
+
     # Getting response confidence intervals
     result = model.predict(keras.preprocessing.sequence.pad_sequences(tokenizer.texts_to_sequences([input]),
                                                                       truncating='post', maxlen=max_len))
@@ -88,8 +93,8 @@ def send_chat():
 def training_home():
     return render_template('user_training.html', form_data=training_data)
 
-@app.route('/training', methods = ['POST'])
-def apply_training():
+@app.route('/training/manual', methods = ['POST'])
+def manual_training():
     new_data = []
     questions = [question for question in request.form.get('inputs').split(',')]
     responses = [response for response in request.form.get('responses').split(',')]
@@ -107,8 +112,21 @@ def apply_training():
     })
 
     append_tokens(new_data)
-
+    retrain_model()
+    wait(10)
     return redirect(url_for('chat_home'))
 
+@app.route('/training/link', methods = ['POST'])
+def link_training():
+    scraper = WikiScraper.WikiScraper()
+    scraper.scrape(request.form.get('wiki_link'))
+
+    tdu = trainingDataUtils.trainingDataUtils(scraper.get_text())
+    tdu.generate_tokens_from_topic(scraper.get_topic())
+    tdu.append_tokens()
+    tdu.stop_client()
+    retrain_model()
+
+    return redirect(url_for('chat_home'))
 # Instantiates app runtime.
 app.run()

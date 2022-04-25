@@ -54,6 +54,7 @@
             "topic": "know_more",
             "inputs": [
                 "Can you tell me more?",
+                "I want to know more!",
                 "Anything else?",
                 "More"
             ],
@@ -66,6 +67,37 @@
             "inputs": [],
             "responses": [
                 "I really don't know anything about that, perhaps you should <a class=\"contents\" href=\"/training\">teach me!</a>"
+            ]
+        },
+        {
+            "topic": "Paired Weapons",
+            "inputs": [
+                "What are Paired Weapons",
+                "What is Paired Weapons",
+                "What can you tell me about Paired Weapons",
+                "What about Paired Weapons",
+                "Paired Weapons"
+            ],
+            "responses": [
+                "Paired Weapons can potentially be any kind of weapon, from Colossal Swords\u00a0to Daggers."
+            ]
+        },
+        {
+            "topic": "Ashes of War",
+            "inputs": [
+                "What are Ashes of War",
+                "What is Ashes of War",
+                "What can you tell me about Ashes of War",
+                "What about Ashes of War",
+                "Ashes of War"
+            ],
+            "responses": [
+                "Ashes of War for Elden Ring are special items\u00a0which enables you to replace the Weapon Skills and Affinities of your\u00a0equipment with new ones.",
+                "Players can apply Ashes of War to their Weapons and Shields\u00a0to modify their affinities and grant them new Skills.",
+                "Note that you can \"unenchant\" your Weapon or Shield at a Site of Grace by selecting the Ashes of War tab, and clicking on the Weapon or Shield and selecting \"Unenchant\" to remove the effects of an Ash of War and return the Weapon or Shield back to it's original scaling and Skill.",
+                "Ashes of War that consist of melee attacks have their damage based on weapon damage.",
+                "Note that some Ashes of War have attacks that do both things at the same time: that is, their special attack is both a spell-based attack on top of a melee attack (like the Ash of War of the Blasphemous Blade, which does a vertical melee-based attack at the same time it fires a spell-based fire attack).",
+                "Ashes of War damage is boosted by equipment that specifically says so (like Shard of Alexander) and anything that boosts the specific damage type of the Ash of War in question (for example, since Ash of War: Glintstone Pebble\u00a0does magic damage, it can be boosted by the sorcery Terra Magica, the Magic Scorpion Charm\u00a0talisman, etc."
             ]
         }
     ]

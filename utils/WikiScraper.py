@@ -22,7 +22,7 @@ class WikiScraper:
     def __init__(self):
         pass
 
-    def scrape(self, url):
+    def scrape(self, url, depth_scrape=False):
         page = requests.get(url)
         soup = BeautifulSoup(page.content, "html.parser")
 
@@ -34,6 +34,9 @@ class WikiScraper:
         for doc in content:
             if len(nltk.sent_tokenize(doc.getText())) > 1:
                 paragraphs.append(nltk.sent_tokenize(doc.getText()))
+
+        if depth_scrape:
+            print(get_links)
 
         for paragraph in paragraphs:
             for sentence in paragraph:
@@ -72,15 +75,4 @@ class WikiScraper:
             urls.add(href)
             internal_urls.add(href)
         return urls
-
-    urls_visited = 0
-
-    def crawl(url, max_urls=30):
-        global urls_visited
-        urls_visited += 1
-        links = get_links(url)
-        for link in links:
-            if urls_visited > max_urls:
-                break
-            crawl(link, max_urls=max_urls)
 

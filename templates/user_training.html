@@ -6,12 +6,21 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/form.css') }}">
 </head>
 <body>
-    <p>Use this form to add training data:</p>
-    <form action="/training" method = "POST">
-        <p>Topic: </p><input class="input" type="text" name="new_topic"/>
-        <p>Example Input: </p><input class="input" type="text" name="inputs"/>
-        <p>Example Responses: </p><input class="input" type="text" name="responses"/>
-        <input type="submit" value="Submit"/>
-    </form>
+    <div class="manual">
+        <p>Use this form to add training data:</p>
+        <form action="/training/manual" method = "POST">
+            <p>Topic: </p><input class="input" type="text" name="new_topic"/>
+            <p>Example Input: </p><input class="input" type="text" name="inputs"/>
+            <p>Example Responses: </p><input class="input" type="text" name="responses"/>
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
+    <div class="linkBased">
+        <p>Alternatively place a link here to parse it</p>
+        <form action="/training/link" method = "POST">
+            <input class="input" type="text" name="wiki_link"/>
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
 </body>
 </html>

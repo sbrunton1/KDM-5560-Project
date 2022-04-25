@@ -130,3 +130,7 @@ dmypy.json
 
 # Intellij
 .idea/
+
+# tensorflow
+chat_model/
+training_data/

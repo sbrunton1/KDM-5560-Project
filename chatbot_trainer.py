@@ -10,6 +10,10 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from sklearn.preprocessing import LabelEncoder
 
 
+def retrain_model():
+    new_bot = ChatBot()
+    new_bot.initialize_training()
+
 class ChatBot:
 
     lbl_encoder = LabelEncoder()

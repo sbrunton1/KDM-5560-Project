@@ -63,21 +63,32 @@ class trainingDataUtils:
             for sentence in document['sentences']:
                 for token in sentence['tokens']:
                     if (token['pos'] in postags) or (token['index'] == 1 and 'NN' in token['pos']):
-                        topic = token['word']
+                        topic = token
 
                 if topic in text:
                     responses.append(text)
-
-            self.training_data.append({
-                "topic": topic,
-                "inputs": [
-                    "What is {}".format(topic),
-                    "What can you tell me about {}".format(topic),
-                    "What about {}".format(topic),
-                    topic
-                ],
-                "responses": responses
-            })
+            if (topic['pos']) == "NNPS":
+                self.training_data.append({
+                    "topic": topic['word'],
+                    "inputs": [
+                        "What are {}".format(topic['word']),
+                        "What can you tell me about {}".format(topic['word']),
+                        "What about {}".format(topic['word']),
+                        topic['word']
+                    ],
+                    "responses": responses
+                })
+            else:
+                self.training_data.append({
+                    "topic": topic['word'],
+                    "inputs": [
+                        "What is {}".format(topic['word']),
+                        "What can you tell me about {}".format(topic['word']),
+                        "What about {}".format(topic['word']),
+                        topic['word']
+                    ],
+                    "responses": responses
+                })
 
 
     def append_tokens(self):
@@ -96,13 +107,15 @@ class trainingDataUtils:
             triplets = self.get_triplets(text)
             if topic in text:
                 for i in triplets:
-                    if topic == i['subject']:
+                    print(i['subject'], topic)
+                    if topic == i['subject'] or i['subject'] in topic:
                         if text not in responses:
                             responses.append(text)
 
         self.training_data.append({
             "topic": topic,
             "inputs": [
+                "What are {}".format(topic),
                 "What is {}".format(topic),
                 "What can you tell me about {}".format(topic),
                 "What about {}".format(topic),
