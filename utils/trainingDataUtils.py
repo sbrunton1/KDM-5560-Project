@@ -1,10 +1,21 @@
-import json
+import json, logging
 import os
 import re
 import requests
 import stanza
 import time
 from stanza.server import CoreNLPClient
+
+
+def append_tokens(training_data):
+    logging.info(training_data)
+    with open('training_data/training.json', 'r+') as file:
+        file_data = json.load(file)
+        for topic in training_data:
+            if topic not in file_data["topics"]:
+                file_data["topics"].append(topic)
+        file.seek(0)
+        json.dump(file_data, file, indent=4)
 
 
 class trainingDataUtils:

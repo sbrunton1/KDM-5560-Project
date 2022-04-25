@@ -6,8 +6,8 @@
                 "Hi",
                 "Hey",
                 "Is anyone there?",
-                "Hello",
-                "Hay"
+                "Hello?",
+                "Hello!"
             ],
             "responses": [
                 "Hello",
@@ -25,7 +25,10 @@
                 "Thanks for the help"
             ],
             "responses": [
-                "Happy to help!"
+                "Happy to help!",
+                "You're very welcome!",
+                "No problem!",
+                "Not a problem, anything else?"
             ]
         },
         {
@@ -62,7 +65,7 @@
             "topic": "unknown",
             "inputs": [],
             "responses": [
-                "I really don't know anything about that, perhaps you should teach me!"
+                "I really don't know anything about that, perhaps you should <a class=\"contents\" href=\"/training\">teach me!</a>"
             ]
         }
     ]

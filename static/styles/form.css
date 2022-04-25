@@ -3,7 +3,7 @@
     margin: 20px;
     display: inline-flex;
     position: relative;
-    width: 100px;
+    width: 200px;
     height: auto;
     padding: 18px;
 }
@@ -17,7 +17,7 @@
 
 .sendBox {
     height: 30px;
-    width: 400px;
+    width: 600px;
 }
 
 .userIn {
@@ -35,8 +35,8 @@
 }
 
 .chatBox {
-    height: 400px;
-    width: 400px;
+    height: 600px;
+    width: 600px;
     overflow: scroll;
     display: flex;
     flex-direction: column-reverse;
@@ -44,6 +44,9 @@
     scrollbar-width: none;  /* Firefox */
 }
 
+.contents {
+    display: contents;
+}
  /* Hide scrollbar for Chrome, Safari and Opera */
 .chatBox::-webkit-scrollbar {
     display: none;

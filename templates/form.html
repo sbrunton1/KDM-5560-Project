@@ -3,11 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <title>ChatBot</title>
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/form.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/form.css') }}">
     </head>
     <body>
         <div class="chatBox">
             <ul class="chats">
+                {% if form_data|length == 0 %}
+                    <li class="botOut talk-bubble tri-right round right-in">No user input has been detected, perhaps you should <a class="contents" href="/training">train me?</a></li>
+                {% endif %}
                 {% for response in form_data %}
                 <li>
                     <div class="userIn talk-bubble tri-right round left-in">{{response[0]}}</div>
@@ -18,7 +21,7 @@
         </div>
         <form action="/" method = "POST">
             <p>
-                <input class="sendBox input" type="text" name = "chat_input" />
+                <input class="sendBox input" type="text" name = "chat_input" required>
             </p>
         </form>
     </body>
