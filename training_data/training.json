@@ -5,9 +5,8 @@
             "inputs": [
                 "Hi",
                 "Hey",
-                "Is anyone there?",
-                "Hello?",
-                "Hello!"
+                "Is anyone there",
+                "Hello"
             ],
             "responses": [
                 "Hello",
@@ -34,8 +33,9 @@
         {
             "topic": "whom",
             "inputs": [
-                "Who are you?",
-                "What are you?"
+                "Who are you",
+                "What are you",
+                "Can you tell me about yourself"
             ],
             "responses": [
                 "I'm an AI chatbot, powered by tensorflow!"
@@ -44,7 +44,9 @@
         {
             "topic": "about",
             "inputs": [
-                "How are you?"
+                "How are you",
+                "How are you doing",
+                "How is it going"
             ],
             "responses": [
                 "I'm good!, thanks for asking!"
@@ -53,10 +55,11 @@
         {
             "topic": "know_more",
             "inputs": [
-                "Can you tell me more?",
-                "I want to know more!",
-                "Anything else?",
-                "More"
+                "Tell me more",
+                "I want to know more",
+                "More",
+                "More information",
+                "Continue"
             ],
             "responses": [
                 "I don't know what you're talking about"
@@ -70,34 +73,49 @@
             ]
         },
         {
-            "topic": "Paired Weapons",
+            "topic": "Elden Ring",
             "inputs": [
-                "What are Paired Weapons",
-                "What is Paired Weapons",
-                "What can you tell me about Paired Weapons",
-                "What about Paired Weapons",
-                "Paired Weapons"
+                "What are Elden Ring",
+                "What is Elden Ring",
+                "What can you tell me about Elden Ring",
+                "What about Elden Ring",
+                "Elden Ring"
             ],
             "responses": [
-                "Paired Weapons can potentially be any kind of weapon, from Colossal Swords\u00a0to Daggers."
+                "Elden Ring is an open-world ARPG developed by FromSoftware and published by Bandai Namco Entertainment.",
+                "Elden Ring is available on PC, Xbox One, Playstation 4, Xbox Series X, and Playstation 5.",
+                "the Elden Ring shattered by someone, or something.",
+                "Elden Ring is an ARPG that introduces a new open-world where players can expect a\u00a0larger world scale, allowing freedom of exploration.",
+                "Elden Ring is a third-person action RPG with a dark fantasy setting where the story revolves around the Elden Ring.",
+                "Elden Ring will have complete freedom when it comes to building up your character, you are free to combine your\u00a0Skills\u00a0with different weapons and equipment, and you'll learn magic as well.",
+                "Elden Ring will have a large scale in terms of the world and exploration, and to go hand-in-hand with this, some new mechanics are introduced such as jumping, yes players can jump now, as well as riding on horseback (Mounts).",
+                "Elden Ring features a large scale when it comes to its world and exploration, so it does make sense that it really is up to you on how you want to tackle the game, it is highly encouraged that players carefully assess the situation that lies ahead and to find different ways to deal with it."
             ]
         },
         {
-            "topic": "Ashes of War",
+            "topic": "Straight Swords",
             "inputs": [
-                "What are Ashes of War",
-                "What is Ashes of War",
-                "What can you tell me about Ashes of War",
-                "What about Ashes of War",
-                "Ashes of War"
+                "What are Straight Swords",
+                "What is Straight Swords",
+                "What can you tell me about Straight Swords",
+                "What about Straight Swords",
+                "Straight Swords"
             ],
             "responses": [
-                "Ashes of War for Elden Ring are special items\u00a0which enables you to replace the Weapon Skills and Affinities of your\u00a0equipment with new ones.",
-                "Players can apply Ashes of War to their Weapons and Shields\u00a0to modify their affinities and grant them new Skills.",
-                "Note that you can \"unenchant\" your Weapon or Shield at a Site of Grace by selecting the Ashes of War tab, and clicking on the Weapon or Shield and selecting \"Unenchant\" to remove the effects of an Ash of War and return the Weapon or Shield back to it's original scaling and Skill.",
-                "Ashes of War that consist of melee attacks have their damage based on weapon damage.",
-                "Note that some Ashes of War have attacks that do both things at the same time: that is, their special attack is both a spell-based attack on top of a melee attack (like the Ash of War of the Blasphemous Blade, which does a vertical melee-based attack at the same time it fires a spell-based fire attack).",
-                "Ashes of War damage is boosted by equipment that specifically says so (like Shard of Alexander) and anything that boosts the specific damage type of the Ash of War in question (for example, since Ash of War: Glintstone Pebble\u00a0does magic damage, it can be boosted by the sorcery Terra Magica, the Magic Scorpion Charm\u00a0talisman, etc."
+                "Straight Swords are a type of Weapon in Elden Ring.",
+                "Straight Swords are some of the easiest Weapons to use in Elden Ring, and work well when combined with a Shield, allows for quick follow up attacks after Blocking.",
+                "Straight Swords are compatible with nearly all Ashes of War, making them extremely versatile, and useable in many different Builds."
+            ]
+        },
+        {
+            "topic": "complements",
+            "inputs": [
+                "You're so cool!",
+                " I like you!",
+                "complements"
+            ],
+            "responses": [
+                "Thanks! I appreciate it!"
             ]
         }
     ]

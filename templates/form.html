@@ -9,7 +9,10 @@
         <div class="chatBox">
             <ul class="chats">
                 {% if form_data|length == 0 %}
-                    <li class="botOut talk-bubble tri-right round right-in">No user input has been detected, perhaps you should <a class="contents" href="/training">train me?</a></li>
+                    <li>
+                        <div class="userIn talk-bubble tri-right round left-in" style="visibility: hidden;"></div>
+                        <div class="botOut talk-bubble tri-right round right-in">No user input has been detected, perhaps you should <a class="contents" href="/training">train me?</a></div>
+                    </li>
                 {% endif %}
                 {% for response in form_data %}
                 <li>

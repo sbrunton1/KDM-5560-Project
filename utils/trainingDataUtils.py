@@ -1,11 +1,12 @@
-import json, logging
+import json, logging, sys
 import os
 import re
 import requests
 import stanza
 import time
-from stanza.server import CoreNLPClient
-
+import spacy
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
 
 def append_tokens(training_data):
     logging.info(training_data)
@@ -18,32 +19,55 @@ def append_tokens(training_data):
         json.dump(file_data, file, indent=4)
 
 
+def compare_terms(topic, subject):
+    sw = stopwords.words('english')
+    topic_list = word_tokenize(topic)
+    subject_list = word_tokenize(subject)
+    l1 = []
+    l2 = []
+
+    topic_set = {w for w in topic_list if not w in sw}
+    subject_set = {w for w in subject_list if not w in sw}
+
+    r_vector = topic_set.union(subject_set)
+    for w in r_vector:
+        if w in topic_set:
+            l1.append(1)  # create a vector
+        else:
+            l1.append(0)
+        if w in subject_set:
+            l2.append(1)
+        else:
+            l2.append(0)
+    c = 0
+
+    for i in range(len(r_vector)):
+        c += l1[i] * l2[i]
+
+    if sum(l1) == 0 or sum(l2) == 0:
+        return 0
+
+    cosine = c / float((sum(l1) * sum(l2)) ** 0.5)
+
+    return cosine
+
+
+def space_swap(lst):
+    text_mod = []
+    for s in lst:
+        text_mod.append(str(s).replace(u'\xa0', u' '))
+    return text_mod
+
+
 class trainingDataUtils:
     """
     Utilities class for collection and modification of data to be used in training.
-
-    If you leave a port open run the following
-    netstat -ano | findstr :9001
-    taskkill /PID <enter your Pid> /f
     """
     training_data = []
     all_text = []
-    client = None
 
     def __init__(self, text):
         self.all_text = text
-
-        # Download the Stanford CoreNLP package with Stanza's installation command
-        # This'll take several minutes, depending on the network speed
-        corenlp_dir = '../corenlp'
-        stanza.install_corenlp(dir=corenlp_dir)
-
-        # Set the CORENLP_HOME environment variable to point to the installation location
-        os.environ["CORENLP_HOME"] = corenlp_dir
-        self.client = CoreNLPClient(timeout=15000, be_quiet=True, annotators=['openie'],
-                                    endpoint='http://localhost:9001')
-        self.client.start()
-        time.sleep(10)
 
     # Getters
     def get_token_sent(self):
@@ -53,43 +77,6 @@ class trainingDataUtils:
 
     def get_all_text(self):
         return self.all_text
-
-    def generate_training_tokens(self):
-        postags = ['NNPS', 'NNP', 'NNS']
-        topic = ""
-        responses = []
-        for text in self.all_text:
-            document = self.client.annotate(text, annotators='pos', output_format='json')
-            for sentence in document['sentences']:
-                for token in sentence['tokens']:
-                    if (token['pos'] in postags) or (token['index'] == 1 and 'NN' in token['pos']):
-                        topic = token
-
-                if topic in text:
-                    responses.append(text)
-            if (topic['pos']) == "NNPS":
-                self.training_data.append({
-                    "topic": topic['word'],
-                    "inputs": [
-                        "What are {}".format(topic['word']),
-                        "What can you tell me about {}".format(topic['word']),
-                        "What about {}".format(topic['word']),
-                        topic['word']
-                    ],
-                    "responses": responses
-                })
-            else:
-                self.training_data.append({
-                    "topic": topic['word'],
-                    "inputs": [
-                        "What is {}".format(topic['word']),
-                        "What can you tell me about {}".format(topic['word']),
-                        "What about {}".format(topic['word']),
-                        topic['word']
-                    ],
-                    "responses": responses
-                })
-
 
     def append_tokens(self):
         with open('training_data/training.json', 'r+') as file:
@@ -104,11 +91,11 @@ class trainingDataUtils:
         responses = []
 
         for text in self.all_text:
-            triplets = self.get_triplets(text)
+            subjects = self.get_subjects(text)
             if topic in text:
-                for i in triplets:
-                    print(i['subject'], topic)
-                    if topic == i['subject'] or i['subject'] in topic:
+                for subject in subjects:
+                    cosine = compare_terms(topic, subject)
+                    if cosine > 0.5:
                         if text not in responses:
                             responses.append(text)
 
@@ -124,25 +111,13 @@ class trainingDataUtils:
             "responses": responses
         })
 
-    def get_triplets(self, text):
-        triples = []
-        document = self.client.annotate(text, annotators='openie', output_format='json')
-        for sentence in document['sentences']:
-            for triple in sentence['openie']:
-                triples.append({
-                    'subject': triple['subject'],
-                    'relation': triple['relation'],
-                    'object': triple['object']
-                })
-        return triples
+    def get_subjects(self, text):
+        nlp = spacy.load('en_core_web_sm')
+        sentences = [i for i in nlp(text).sents]
+        sub_tokens = []
 
-    # Utility methods
-    def space_swap(self, lst):
-        text_mod = []
-        for s in lst:
-            text_mod.append(str(s).replace(u'\xa0', u' '))
-        return text_mod
+        for sentence in sentences:
+            doc = nlp(str(sentence))
+            sub_tokens = [str(tok) for tok in doc if (tok.dep_ == "nsubj")]
 
-
-    def stop_client(self):
-        self.client.stop()
+        return sub_tokens

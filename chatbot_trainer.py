@@ -60,11 +60,13 @@ class ChatBot:
         return padded_sequences
 
     def generate_model(self, padded_sequences, t_labels, topics):
+
+        tensors = 16 + 4 * topics - 6
         model = Sequential([
-            Embedding(2000, 32, input_length=50),
+            Embedding(1000, 16, input_length=20),
             GlobalAveragePooling1D(),
-            Dense(256, activation='relu'),
-            Dense(256, activation='relu'),
+            Dense(tensors, activation='relu'),
+            Dense(tensors, activation='relu'),
             Dense(topics, activation='softmax')
         ])
 
@@ -73,7 +75,7 @@ class ChatBot:
 
         model.summary()
 
-        model.fit(padded_sequences, np.array(t_labels), epochs=1000)
+        model.fit(padded_sequences, np.array(t_labels), epochs=500)
 
         # to save the trained model
         model.save("chat_model")
