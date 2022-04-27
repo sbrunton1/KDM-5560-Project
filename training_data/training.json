@@ -71,52 +71,6 @@
             "responses": [
                 "I really don't know anything about that, perhaps you should <a class=\"contents\" href=\"/training\">teach me!</a>"
             ]
-        },
-        {
-            "topic": "Elden Ring",
-            "inputs": [
-                "What are Elden Ring",
-                "What is Elden Ring",
-                "What can you tell me about Elden Ring",
-                "What about Elden Ring",
-                "Elden Ring"
-            ],
-            "responses": [
-                "Elden Ring is an open-world ARPG developed by FromSoftware and published by Bandai Namco Entertainment.",
-                "Elden Ring is available on PC, Xbox One, Playstation 4, Xbox Series X, and Playstation 5.",
-                "the Elden Ring shattered by someone, or something.",
-                "Elden Ring is an ARPG that introduces a new open-world where players can expect a\u00a0larger world scale, allowing freedom of exploration.",
-                "Elden Ring is a third-person action RPG with a dark fantasy setting where the story revolves around the Elden Ring.",
-                "Elden Ring will have complete freedom when it comes to building up your character, you are free to combine your\u00a0Skills\u00a0with different weapons and equipment, and you'll learn magic as well.",
-                "Elden Ring will have a large scale in terms of the world and exploration, and to go hand-in-hand with this, some new mechanics are introduced such as jumping, yes players can jump now, as well as riding on horseback (Mounts).",
-                "Elden Ring features a large scale when it comes to its world and exploration, so it does make sense that it really is up to you on how you want to tackle the game, it is highly encouraged that players carefully assess the situation that lies ahead and to find different ways to deal with it."
-            ]
-        },
-        {
-            "topic": "Straight Swords",
-            "inputs": [
-                "What are Straight Swords",
-                "What is Straight Swords",
-                "What can you tell me about Straight Swords",
-                "What about Straight Swords",
-                "Straight Swords"
-            ],
-            "responses": [
-                "Straight Swords are a type of Weapon in Elden Ring.",
-                "Straight Swords are some of the easiest Weapons to use in Elden Ring, and work well when combined with a Shield, allows for quick follow up attacks after Blocking.",
-                "Straight Swords are compatible with nearly all Ashes of War, making them extremely versatile, and useable in many different Builds."
-            ]
-        },
-        {
-            "topic": "complements",
-            "inputs": [
-                "You're so cool!",
-                " I like you!",
-                "complements"
-            ],
-            "responses": [
-                "Thanks! I appreciate it!"
-            ]
         }
     ]
 }
