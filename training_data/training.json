@@ -38,7 +38,7 @@
                 "Can you tell me about yourself"
             ],
             "responses": [
-                "I'm an AI chatbot, powered by tensorflow!"
+                "I'm an AI chatbot, powered by tensorflow! I can't do much initially, but if you <a class=\"contents\" href=\"/training\">teach me</a> I'm sure I can learn very quickly!"
             ]
         },
         {
@@ -59,7 +59,8 @@
                 "I want to know more",
                 "More",
                 "More information",
-                "Continue"
+                "Continue",
+                "know more"
             ],
             "responses": [
                 "I don't know what you're talking about"
